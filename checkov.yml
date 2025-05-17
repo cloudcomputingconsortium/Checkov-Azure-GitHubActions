@@ -1,0 +1,21 @@
+
+name: Checkov IaC Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: .
+          framework: terraform
+          output_format: cli
